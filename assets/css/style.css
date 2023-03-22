@@ -1,0 +1,14 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body > div.h100vh
+{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../img/fujisan.jpg");
+    background-size: cover;
+}
