@@ -23,6 +23,10 @@ const       adult_price     = 1;
 // Tariffa percentuale per over 65: 60%, ovvero sconto 40%
 const       senior_price    = 0.6;
 
+// Intervallo chilometrico valido perl'input
+const       min_km          = 1;
+const       max_km          = 999;
+
 //********** Variabili globali di riferimento **********
 
 // Coefficiente moltiplicativo che determina il prezzo finale. Può assumere uno dei tre valori delle costanti junior_price, adult_price (default) o senior_price
@@ -69,14 +73,18 @@ function calc_price()
     traveler = "Adulto/a";
     percent_str = "Prezzo pieno";
 
-    // Controlli finalizzati a determinare il tipo di viaggiatore (fascia d'età), con conseguente settaggio delle relative variabili
-    if (j_18)
-    // Caso di viaggiatore junior (minorenne - sconto 20%)
+    // Controllo relativo alla congruità della percorrenza chilometrica (inclusione nell'intervallo min/max e valore intero)
+    if (km >= min_km && km <= max_km && Math.floor(km) == Math.ceil(km))
+    // Percorrenza congrua
     {
-        percent_price = junior_price;
-        traveler = "Ragazzo/a";
-        percent_str = "Sconto 20%";
-    }
+        // Controlli finalizzati a determinare il tipo di viaggiatore (fascia d'età), con conseguente settaggio delle relative variabili
+        if (j_18)
+        // Caso di viaggiatore junior (minorenne - sconto 20%)
+        {
+            percent_price = junior_price;
+            traveler = "Ragazzo/a";
+            percent_str = "Sconto 20%";
+        }
         else if (s_65)
         // Caso di viaggiatore senior (ultra sessantacinquenne - sconto 40%)
         {
@@ -85,43 +93,51 @@ function calc_price()
             percent_str = "Sconto 40%";
         }
 
-    // Inizializzazione della stringa identificativa del tipo di viaggio, al valore di default (viaggio breve)    
-    trip = "Viaggio breve";
-    // Controlli finalizzati a determinare il tipo di viaggio (breve, medio o lungo), con settaggio della relativa variabile
-    if (km > 50)
-    // Caso di viaggio NON breve
-    {
-        if (km > 250)
-        // Caso di viaggio lungo
+        // Inizializzazione della stringa identificativa del tipo di viaggio, al valore di default (viaggio breve)    
+        trip = "Viaggio breve";
+        // Controlli finalizzati a determinare il tipo di viaggio (breve, medio o lungo), con settaggio della relativa variabile
+        if (km > 50)
+        // Caso di viaggio NON breve
         {
-            trip = "Viaggio lungo";
+            if (km > 250)
+            // Caso di viaggio lungo
+            {
+                trip = "Viaggio lungo";
+            }
+            else
+            // Caso di viaggio medio
+            {
+                trip = "Viaggio medio";
+            }
         }
-        else
-        // Caso di viaggio medio
-        {
-            trip = "Viaggio medio";
-        }
+
+        // Calcolo del prezzo standard
+        regular_price = km * basic_fare;
+        regular_str = regular_price.toFixed(2);
+
+        // Calcolo del prezzo effettivo (eventualmente scontato)
+        final_price = regular_price * percent_price;
+        final_str = final_price.toFixed(2);
+
+        // Calcolo dello sconto eventualmente applicato
+        discount = regular_price - final_price;
+        discount_str = discount.toFixed(2);
+
+        // ********** Output in console **********
+        console.log(" ");
+        console.log("** INIZIO **");
+        console.log(`${trip} - ${km} Km`);
+        console.log(`${traveler} - ${percent_str}`);
+        console.log(`Prezzo: ${regular_str} €`);
+        console.log(`Pagato: ${final_str} €`);
+        console.log(`Sconto: ${discount_str} €`);
+        console.log("*** FINE ***");
     }
-
-    // Calcolo del prezzo standard
-    regular_price = km * basic_fare;
-    regular_str = regular_price.toFixed(2);
-
-    // Calcolo del prezzo effettivo (eventualmente scontato)
-    final_price = regular_price * percent_price;
-    final_str = final_price.toFixed(2);
-
-    // Calcolo dello sconto eventualmente applicato
-    discount = regular_price - final_price;
-    discount_str = discount.toFixed(2);
-
-    // ********** Output in console **********
-    console.log(" ");
-    console.log("** INIZIO **");
-    console.log(`${trip} - ${km} Km`);
-    console.log(`${traveler} - ${percent_str}`);
-    console.log(`Prezzo: ${regular_str} €`);
-    console.log(`Pagato: ${final_str} €`);
-    console.log(`Sconto: ${discount_str} €`);
-    console.log("*** FINE ***");
+    else
+    // Percorrenza non congrua
+    {
+        console.log("DATI NON VALIDI");
+        alert("I DATI INSERITI NON SONO VALIDI. CLICCA PER RICARICARE LA PAGINA");
+        location.reload();
+    }
 }
