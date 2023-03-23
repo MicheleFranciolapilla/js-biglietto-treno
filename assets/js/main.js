@@ -29,6 +29,9 @@ const       max_km          = 999;
 
 //********** Variabili globali di riferimento **********
 
+// Variabile globale che assumerà il valore di percorrenza dato in input
+let         km              = 0;
+
 // Coefficiente moltiplicativo che determina il prezzo finale. Può assumere uno dei tre valori delle costanti junior_price, adult_price (default) o senior_price
 let         percent_price   = adult_price;
 
@@ -55,18 +58,38 @@ let         regular_str     = "";
 let         final_str       = "";  
 let         discount_str    = "";       
 
+function output_data()
+{
+    document.getElementById('output_area').innerHTML = 
+    `<div class="row w-100 p-3 border border-info rounded-3 py-2">
+        <h3 class="text-center text-black-50">Il tuo biglietto è pronto!</h3>
+        <div class="w-100 d-flex justify-content-between">
+            <img src="assets/img/person-walking-luggage-solid.svg" alt="...">
+            <img src="assets/img/train-solid.svg" alt="...">
+        </div>
+        <div id="trip_data" class="border border-info rounded-2 m-1 mt-3 py-2">
+            <h3>Il tuo viaggio:</h3>
+            <h6>${trip} - ${km} Km</h6>
+            <h6>${traveler} - ${percent_str}</h6>
+            <h6>Prezzo: ${regular_str} €</h6>
+            <h6>Pagato: ${final_str} €</h6>
+            <h6>Sconto: ${discount_str} €</h6>
+        </div>
+    </div>`;
+}
+
 // Funzione che recupera i dati dell'input, calcola tutti i parametri e produce output in console.log
 function calc_price()
 {
     // ********** Costanti locali **********
 
-    // Costante associata alla percorrenza selezionata
-    const   km      = document.getElementById('distance').value;
-
     // Costanti booleane che identificano la fascia d'età selezionata
     const   j_18    = document.getElementById('junior').checked;
     const   mid     = document.getElementById('adult').checked;
     const   s_65    = document.getElementById('senior').checked;
+
+    // Acquisizione percorrenza nella variabile globale km
+    km      = document.getElementById('distance').value;
 
     // Inizializzazione di alcune variabili sul caso di default di viaggiatore adulto (prezzo pieno)
     percent_price = adult_price;
@@ -132,6 +155,7 @@ function calc_price()
         console.log(`Pagato: ${final_str} €`);
         console.log(`Sconto: ${discount_str} €`);
         console.log("*** FINE ***");
+        output_data();
     }
     else
     // Percorrenza non congrua
