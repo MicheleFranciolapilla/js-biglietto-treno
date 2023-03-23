@@ -12,3 +12,19 @@ body > div.h100vh
     background-image: url("../img/fujisan.jpg");
     background-size: cover;
 }
+
+main > #input_area
+{
+    background-color: rgba(193, 196, 197, 0.5);
+}
+
+main > #input_area > #age_area,
+main > #input_area > #km_area
+{
+    background-color: lightgray;
+}
+
+main > #input_area > #age_area input:checked ~ *
+{
+    color: blue;
+}

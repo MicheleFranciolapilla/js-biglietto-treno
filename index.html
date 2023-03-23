@@ -19,31 +19,34 @@
             <h1 class="text-center text-white-50">TRAIN FARE CALCULATOR</h1>
         </header>
         <main class="row">
-            <section id="input_area" class="col-3 offset-1 mt-5 py-2">
-                <h2>Inserire i dati richiesti</h2>
-                <div id="age_area" class="row mt-3">
+            <section id="input_area" class="col-3 d-flex flex-column offset-1 border border-info rounded-3 mt-2 py-2">
+                <h3 class="text-center">Inserire i dati richiesti</h3>
+                <div id="age_area" class="row flex-column align-items-start border border-info rounded-2 m-1 mt-3 py-2">
                     <h5>Scegliere la classe di età</h5>
-                    <div class="col-8">
+                    <div class="col-8 d-flex justify-content-between">
                         <input class="form-check-input" type="radio" id="junior" name="age">
-                        <label class="form-check-label" for="junior">Junior (0 - 18 anni)</label>
+                        <span class="w-50">Junior</span> 
+                        <label class="form-check-label w-25" for="junior">(18-)</label>
                     </div>
-                    <div class="col-8">
+                    <div class="col-8 d-flex justify-content-between">
                         <input class="form-check-input" type="radio" id="adult" name="age" checked>
-                        <label class="form-check-label" for="adult">Adulto (19 - 65 anni)</label>
+                        <span class="w-50">Adulto</span> 
+                        <label class="form-check-label w-25" for="adult">(18+)</label>
                     </div>
-                    <div class="col-8">
+                    <div class="col-8 d-flex justify-content-between">
                         <input class="form-check-input" type="radio" id="senior" name="age">
-                        <label class="form-check-label" for="senior">Senior (+65 anni)</label>
+                        <span class="w-50">Senior</span> 
+                        <label class="form-check-label w-25" for="senior">(65+)</label>
                     </div>
                 </div>
-                <div id="km_area" class="row mt-3">
+                <div id="km_area" class="row flex-column align-items-start border border-info rounded-2 m-1 mt-3 py-2">
                     <h5>Scegliere la distanza</h5>
-                    <label for="distance" class="form-label">Distanza in km (max 1000)</label>
+                    <label for="distance" class="form-label">Distanza in km (max 999)</label>
                     <div class="col-4">
-                        <input type="number" min="1" max="1000" step="0.5" value="10" class="form-control" id="distance">
+                        <input type="number" min="1" max="999" step="1" maxlength="3" value="10" class="form-control" id="distance">
                     </div>
                 </div>
-                <div class="col-3 mt-3">
+                <div class="align-self-center mt-3">
                     <button class="btn btn-primary" type="submit" onclick="calc_price()">Conferma</button>
                 </div>
             </section>
