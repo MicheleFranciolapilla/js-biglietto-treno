@@ -5,6 +5,7 @@
     padding: 0;
 }
 
+/* La pagina si presenta in formato web app (100 vh) */
 body > div.h100vh
 {
     width: 100%;
@@ -35,4 +36,3 @@ main > #output_area img
 {
     width: 35%;
 }
-

@@ -23,7 +23,7 @@ const       adult_price     = 1;
 // Tariffa percentuale per over 65: 60%, ovvero sconto 40%
 const       senior_price    = 0.6;
 
-// Intervallo chilometrico valido perl'input
+// Intervallo chilometrico valido per l'input
 const       min_km          = 1;
 const       max_km          = 999;
 
@@ -58,6 +58,7 @@ let         regular_str     = "";
 let         final_str       = "";  
 let         discount_str    = "";       
 
+// Funzione che restituisce una card esaustiva di output e consente l'elaborazione di un nuovo ticket
 function output_data()
 {
     document.getElementById('output_area').innerHTML = 
