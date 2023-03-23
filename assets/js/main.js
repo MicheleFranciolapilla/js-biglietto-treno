@@ -61,7 +61,7 @@ let         discount_str    = "";
 function output_data()
 {
     document.getElementById('output_area').innerHTML = 
-    `<div class="row w-100 p-3 border border-info rounded-3 py-2">
+    `<div class="row flex-column w-100 p-3 border border-info rounded-3 py-2">
         <h3 class="text-center text-black-50">Il tuo biglietto è pronto!</h3>
         <div class="w-100 d-flex justify-content-between">
             <img src="assets/img/person-walking-luggage-solid.svg" alt="...">
@@ -74,6 +74,9 @@ function output_data()
             <h6>Prezzo: ${regular_str} €</h6>
             <h6>Pagato: ${final_str} €</h6>
             <h6>Sconto: ${discount_str} €</h6>
+        </div>
+        <div class="align-self-center mt-3">
+            <button class="btn btn-primary" type="submit" onclick="location.reload()">Nuovo biglietto</button>
         </div>
     </div>`;
 }
